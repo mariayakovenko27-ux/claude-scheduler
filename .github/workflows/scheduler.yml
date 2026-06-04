@@ -1,0 +1,29 @@
+name: Claude 5-Hour Window Scheduler
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # 06:00 MSK
+    - cron: '0 8 * * *'   # 11:00 MSK
+    - cron: '0 13 * * *'  # 16:00 MSK
+  workflow_dispatch:       # можно запустить вручную
+
+jobs:
+  run-claude:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run Claude task
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "Подтверди что scheduled task запустился. Напиши дату и время: $(date)"
