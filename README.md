@@ -1,1 +1,2 @@
-# claude-scheduler
+# claude-scheduler 
+sheduler работает
