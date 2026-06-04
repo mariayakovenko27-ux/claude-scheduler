@@ -8,22 +8,10 @@ on:
   workflow_dispatch:       # можно запустить вручную
 
 jobs:
-  run-claude:
+  activate-window:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
-
-      - name: Run Claude task
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Activate 5-hour window
         run: |
-          claude -p "Подтверди что scheduled task запустился. Напиши дату и время: $(date)"
+          echo "Window activated at $(date)"
+          echo "Time to open Claude and work!"
